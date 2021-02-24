@@ -1,0 +1,59 @@
+<h1 *ngIf="isAddMode">Add User</h1>
+<h1 *ngIf="!isAddMode">Edit User</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="d-flex flex-row bd-highlight mb-3">
+    <div class="m1-3 bd-highlight" style="width:40%;">
+        <img [src]="PathImagen" height="250px;" width="200px;">
+        <input type="file" (change)="uploadPhoto($event)" class="mt-2"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Nombre:</label>
+        <div class="col-sm-10">
+            <input [(ngModel)]="Nombre" class="form-control" type="text" placeholder="Nombre Empleado" formControlName="Nombre" [ngClass]="{ 'is-invalid': submitted && f.Nombre.errors }">
+            <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
+                <div *ngIf="f.Nombre.Nombre.required">Nombre Requerido</div>
+            </div>
+        </div>
+        <label class="col-sm-2 col-form-label">Telefono:</label>
+        <div class="col-sm-10">
+            <input [(ngModel)]="Telefono" class="form-control" type="number" placeholder="Telefono a 10 digitos" formControlName="Telefono" [ngClass]="{ 'is-invalid': submitted && f.Telefono.errors }">
+            <div *ngIf="submitted && f.Telefono.errors" class="invalid-feedback">
+                <div *ngIf="f.Telefono.errors.required">Telefono Requerido</div>
+                <div *ngIf="f.Telefono.errors.pattern">Formato de telefono incorrecto</div>
+            </div>
+        </div>
+        <label class="col-sm-2 col-form-label">Direccion:</label>
+        <div class="col-sm-10">
+            <input [(ngModel)]="Direccion" class="form-control" type="text" placeholder="Direccion Empleado" formControlName="Direccion" [ngClass]="{ 'is-invalid': submitted && f.Direccion.errors }">
+            <div *ngIf="submitted && f.Direccion.errors" class="invalid-feedback">
+                <div *ngIf="f.Direccion.errors.required">Direccion Requerida</div>
+            </div>
+        </div>
+        <label class="col-sm-2 col-form-label">Curp:</label>
+        <div class="col-sm-10">
+            <input [(ngModel)]="Curp" class="form-control" type="text" placeholder="CURP Empleado" formControlName="Curp" [ngClass]="{ 'is-invalid': submitted && f.Curp.errors }">
+            <div *ngIf="submitted && f.Curp.errors" class="invalid-feedback">
+                <div *ngIf="f.Curp.errors.required">Curp requerida</div>
+                <div *ngIf="f.Curp.errors.pattern">Formato CURP Incorrecta</div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Guardar
+        </button>
+    </div>
+<!--
+    <br>
+    <button (click)="addEmpleado()" *ngIf="emp.Id==0" class="btn btn-primary">
+        Agregar
+    </button>
+
+    <button (click)="updateEmpleado()" *ngIf="emp.Id!=0" class="btn btn-primary">
+        Actualizar
+    </button>
+-->
+</form>
